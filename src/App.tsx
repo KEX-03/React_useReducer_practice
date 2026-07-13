@@ -2,21 +2,23 @@ import { useState, useReducer } from 'react';
 import './App.css';
 
   function reducer(state, action) {
-    return { count: state.count - 1 }
+    switch (action.type) {
+      case 'decrement':
+        return { count: state.count - 1 }
+      case 'increment':
+        return { count: state.count + 1 }
+    }
   }
 
 function App() {
-  // const [count, setCount] = useState(0);
   const [state, dispatch] = useReducer(reducer, {count: 0})
 
   function decrementCount() {
-    dispatch()
+    dispatch({ type: 'decrement' })
   }
 
   function incrementCount() {
-    setCount((prevCount) => {
-      return prevCount + 1;
-    });
+    dispatch({ type: 'increment' })
   }
 
   return (
